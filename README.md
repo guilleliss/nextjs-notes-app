@@ -1,3 +1,5 @@
+# Notes app
+
 Demo app to learn the basics of Nextjs 13 in 30 minutes
 
 ## Getting Started
@@ -21,3 +23,8 @@ pnpm dev
 ```
 
 Point browser to [http://localhost:3000](http://localhost:3000).
+
+## TODO
+
+- Use pocketbase SDK for all operations with database
+- Leverage tailwind for styling
