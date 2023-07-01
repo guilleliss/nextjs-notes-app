@@ -1,26 +1,40 @@
+"use client";
+
+import PocketBase from "pocketbase";
+import { useRouter } from "next/navigation";
 import styles from "../Notes.module.css";
 
 async function getNote(noteId: string) {
-  const res = await fetch(
-    `http://127.0.0.1:8090/api/collections/notes/records/${noteId}`,
-    {
-      next: { revalidate: 10 },
-    }
-  );
-  const data = await res.json();
+  const db = new PocketBase("http://127.0.0.1:8090");
+  const data = await db.collection("notes").getOne(noteId);
   return data;
 }
 
 export default async function NotePage({ params }: any) {
+  const router = useRouter();
   const { id, title, content, created } = await getNote(params.id);
+
+  async function deleteNote(id: string) {
+    const db = new PocketBase("http://127.0.0.1:8090");
+    try {
+      await db.collection("notes").delete(id);
+      router.push("/notes");
+    } catch (error) {
+      console.log("Error:", error);
+    }
+  }
+
   return (
-    <div>
-      <h1>notes/{id}</h1>
+    <div className="space-y-10">
       <div className={styles.note}>
-        <h3>{title}</h3>
+        <h2>{title}</h2>
         <h5>{content}</h5>
         <p>{created}</p>
       </div>
+
+      <button className="bg-red-500" onClick={() => deleteNote(id)}>
+        Delete note
+      </button>
     </div>
   );
 }

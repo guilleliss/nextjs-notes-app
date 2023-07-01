@@ -1,4 +1,36 @@
-* {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button {
+  @apply hover:bg-blue-700 text-white font-bold py-2 px-4 rounded;
+}
+
+input,
+textarea {
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
+}
+
+nav {
+  @apply space-x-3;
+  a {
+    @apply font-bold underline;
+  }
+}
+
+header {
+  @apply container px-20 py-5;
+}
+
+main {
+  @apply container p-20;
+}
+
+h1 {
+  @apply font-bold text-2xl mb-10;
+}
+
+/* * {
   box-sizing: border-box;
 }
 
@@ -26,27 +58,4 @@ main {
   justify-content: flex-start;
   align-items: flex-start;
 }
-
-input,
-textarea {
-  display: block;
-  max-width: 300px;
-  margin: 0.5rem 0;
-}
-
-button {
-  background-color: #000000;
-  border: none;
-  color: white;
-  padding: 0.5rem 2rem;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-}
-
-nav a {
-  font-weight: bold;
-  margin: 0 0.5rem;
-  text-decoration: underline;
-}
+*/
