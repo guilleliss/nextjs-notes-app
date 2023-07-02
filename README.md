@@ -7,19 +7,15 @@ Demo app to learn the basics of Nextjs 13 in 30 minutes
 First run pocketbase:
 
 ```bash
-./pocketbase serve
+~$ ./pocketbase serve
 ```
 
-Point browser to the pocketbase url provider in terminal to create an user and the notes collection with `title` and `content` fields.
+Point browser to the pocketbase url provided in terminal to create an user and the notes collection with `title` and `content` fields.
 
 Then to run the app:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+~$ npm run dev
 ```
 
 Point browser to [http://localhost:3000](http://localhost:3000).
