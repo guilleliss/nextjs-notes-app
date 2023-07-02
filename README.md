@@ -19,8 +19,3 @@ Then to run the app:
 ```
 
 Point browser to [http://localhost:3000](http://localhost:3000).
-
-## TODO
-
-- Use pocketbase SDK for all operations with database
-- Leverage tailwind for styling
