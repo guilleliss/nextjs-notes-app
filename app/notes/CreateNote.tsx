@@ -3,14 +3,17 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PocketBase from "pocketbase";
+import Spinner from "@/components/Spinner";
 
 export default function CreateNote() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const router = useRouter();
 
   const create = async () => {
+    setIsLoading(true);
     if (title && content) {
       try {
         const db = new PocketBase("http://127.0.0.1:8090");
@@ -23,6 +26,8 @@ export default function CreateNote() {
         router.refresh();
       } catch (error) {
         console.log("Error:", error);
+      } finally {
+        setIsLoading(false);
       }
     }
   };
@@ -43,8 +48,8 @@ export default function CreateNote() {
           value={content}
           onChange={(e) => setContent(e.target.value)}
         />
-        <button type="submit" className="bg-red-400">
-          Create note
+        <button type="submit" className="bg-red-400 flex justify-center">
+          {isLoading ? <Spinner /> : "Create note"}
         </button>
       </div>
     </form>

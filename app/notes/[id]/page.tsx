@@ -1,8 +1,10 @@
 "use client";
 
-import PocketBase from "pocketbase";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import PocketBase from "pocketbase";
 import styles from "../Notes.module.css";
+import Spinner from "@/components/Spinner";
 
 async function getNote(noteId: string) {
   const db = new PocketBase("http://127.0.0.1:8090");
@@ -11,12 +13,14 @@ async function getNote(noteId: string) {
 }
 
 export default async function NotePage({ params }: any) {
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id, title, content, created } = await getNote(params.id);
 
   async function deleteNote(id: string) {
-    const db = new PocketBase("http://127.0.0.1:8090");
+    setIsLoading(true);
     try {
+      const db = new PocketBase("http://127.0.0.1:8090");
       await db.collection("notes").delete(id);
       router.push("/notes");
     } catch (error) {
@@ -33,7 +37,7 @@ export default async function NotePage({ params }: any) {
       </div>
 
       <button className="bg-red-500" onClick={() => deleteNote(id)}>
-        Delete note
+        {isLoading ? <Spinner /> : "Delete note"}
       </button>
     </div>
   );
